@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+
+<p>The charts below show the number of fatalities related to heroin, fentanyl and prescription opioids in Carroll County and Maryland from 2007 to 2016. Data is from <a href="https://bha.health.maryland.gov/OVERDOSE_PREVENTION/Documents/Maryland%202016%20Overdose%20Annual%20report.pdf" target="new">Maryland Department of Health and Mental Hygiene annual reports</a>.</p>
+
+<canvas id="lineChartCarroll" width="400" height="400"></canvas>
+<br /><br />
+<canvas id="lineChartMD" width="400" height="400"></canvas>
+
+<script>
+var ctx = document.getElementById("lineChartCarroll");
+var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+    labels: ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+    datasets: [
+		{
+            label: "Heroin",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "#125500",
+            borderColor: "#125500",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "#125500",
+            pointBackgroundColor: "#125500",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#125500",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'triangle',
+            data: [9, 5, 7, 3, 2, 13, 14, 16, 22, 25],
+            spanGaps: false,
+        },
+		{
+            label: "Prescription Opioids",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "#23A300",
+            borderColor: "#23A300",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "#23A300",
+            pointBackgroundColor: "#23A300",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#23A300",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'rect',
+            data: [4, 11, 10, 9, 5, 17, 12, 15, 14, 15],
+            spanGaps: false,
+        },
+		{
+            label: "Fentynal",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "red",
+            borderColor: "red",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "red",
+            pointBackgroundColor: "red",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "red",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'circle',
+            data: [0, 2, 0, 2, 0, 1, 2, 4, 11, 20],
+            spanGaps: false,
+        },
+    ]
+},
+    options: {
+        scales: {
+            yAxes: [{
+				stacked: false,
+                ticks: {
+                    beginAtZero:false,
+					userCallback: function(value, index, values) {
+						value = value.toString();
+						value = value.split(/(?=(?:...)*$)/);
+						value = value.join(',');
+						return value;
+					}
+                },
+				scaleLabel: {
+        			display: true,
+        			labelString: 'Deaths'
+      			}
+            }]
+        },
+		title: {
+			display: true,
+			text: 'Opioid Related Deaths in Carroll County 2007-2016',
+			fontSize: 24
+		},
+		legend: {
+			display: true,
+			position: 'bottom'
+		},
+		tooltips: {
+			enabled: true,
+			displayColors: false,
+			callbacks: {
+				label: function(tooltipItems, data) { 
+                        return data.datasets[tooltipItems.datasetIndex].label + ' related deaths: ' + tooltipItems.yLabel;
+				}
+			},			
+		},
+    }
+});
+</script>
+
+<script>
+var ctx = document.getElementById("lineChartMD");
+var lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+    labels: ["2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+    datasets: [
+		{
+            label: "Heroin",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "#125500",
+            borderColor: "#125500",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "#125500",
+            pointBackgroundColor: "#125500",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#125500",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'triangle',
+            data: [399, 289, 360, 238, 247, 392, 464, 578, 748, 1212],
+            spanGaps: false,
+        },
+		{
+            label: "Prescription Opioids",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "#23A300",
+            borderColor: "#23A300",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "#23A300",
+            pointBackgroundColor: "#23A300",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "#23A300",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'rect',
+            data: [302, 280, 251, 311, 342, 311, 316, 330, 351, 418],
+            spanGaps: false,
+        },
+		{
+            label: "Fentynal",
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "red",
+            borderColor: "red",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            pointBorderColor: "red",
+            pointBackgroundColor: "red",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "red",
+            pointHoverBorderColor: "#ffffff",
+            pointHoverBorderWidth: 2,
+            pointRadius: 5,
+            pointHitRadius: 10,
+			pointStyle: 'circle',
+            data: [26, 25, 27, 39, 26, 29, 58, 186, 340, 1119],
+            spanGaps: false,
+        },
+    ]
+},
+    options: {
+        scales: {
+            yAxes: [{
+				stacked: false,
+                ticks: {
+                    beginAtZero:false,
+					userCallback: function(value, index, values) {
+						value = value.toString();
+						value = value.split(/(?=(?:...)*$)/);
+						value = value.join(',');
+						return value;
+					}
+                },
+				scaleLabel: {
+        			display: true,
+        			labelString: 'Deaths'
+      			}
+            }]
+        },
+		title: {
+			display: true,
+			text: 'Opioid Related Deaths in Maryland 2007-2016',
+			fontSize: 24
+		},
+		legend: {
+			display: true,
+			position: 'bottom'
+		},
+		tooltips: {
+			enabled: true,
+			displayColors: false,
+			callbacks: {
+				label: function(tooltipItems, data) { 
+                        return data.datasets[tooltipItems.datasetIndex].label + ' related deaths: ' + tooltipItems.yLabel;
+				}
+			},			
+		},
+    }
+});
+</script>
+
+</body>
+</html>
